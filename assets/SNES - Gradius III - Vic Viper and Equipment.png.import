@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/SNES - Gradius III - Vic Viper and Equipment.png-aab109bac7cdf5e27de1314dad5fa5f3.stex"
+
+[deps]
+
+source_file="res://assets/SNES - Gradius III - Vic Viper and Equipment.png"
+source_md5="85e1b28412462b8393d5d32aa4786708"
+
+dest_files=[ "res://.import/SNES - Gradius III - Vic Viper and Equipment.png-aab109bac7cdf5e27de1314dad5fa5f3.stex" ]
+dest_md5="c637b2b8170a83d1acc6f7b09e9f7fce"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
