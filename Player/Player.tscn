@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/PlayStation - Gradius Gaiden - Vic Viper.png" type="Texture" id=2]
+[ext_resource path="res://Player/down.tres" type="Animation" id=2]
+[ext_resource path="res://Player/downrecovery.tres" type="Animation" id=3]
+[ext_resource path="res://Player/idle.tres" type="Animation" id=4]
+[ext_resource path="res://Player/up.tres" type="Animation" id=5]
+[ext_resource path="res://Player/uprecovery.tres" type="Animation" id=6]
+[ext_resource path="res://assets/PlayStation - Gradius Gaiden - Vic Viper.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 18.6977, 5.79597 )
+extents = Vector2( 22.152, 8.20346 )
 
 [node name="Player" type="KinematicBody2D" index="0"]
 
@@ -15,19 +20,50 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 max_health = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -3.34957, 3.2449 )
+position = Vector2( -1.57011, 1.15142 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 0
+playback_default_blend_time = 0.0
+playback_speed = 2.0
+anims/down = ExtResource( 2 )
+anims/downrecovery = ExtResource( 3 )
+anims/idle = ExtResource( 4 )
+anims/up = ExtResource( 5 )
+anims/uprecovery = ExtResource( 6 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
+
+[node name="Sprite" type="Sprite" parent="." index="2"]
+
+rotation = -0.785398
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 112, 11, 23, 12 )
-_sections_unfolded = [ "Region", "Transform" ]
+region_rect = Rect2( 8, 10, 23, 16 )
+_sections_unfolded = [ "Animation", "Region", "Transform" ]
+
+[node name="Muzzle" type="Position2D" parent="Sprite" index="0"]
+
+position = Vector2( 10, 0 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="BoostTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 0.4
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
 
 

@@ -10,7 +10,7 @@ config_version=3
 
 [application]
 
-config/name="New Game Project"
+config/name="Space Game"
 run/main_scene="res://Map.tscn"
 boot_splash/fullsize=false
 config/icon="res://icon.png"

@@ -5,6 +5,6 @@ var pos = Vector2()
 func _ready():
 	pass
 
-func _process(delta):
-	pos.x -= 0.08
+func _physics_process(delta):
+	pos.x -= 0.7
 	position = pos
