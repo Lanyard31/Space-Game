@@ -5,6 +5,7 @@ signal dead
 
 const MAX_SPEED = 350
 
+export (PackedScene) var Bullet
 export (int) var max_health
 
 var rotation_speed = 0.02
@@ -26,8 +27,12 @@ func get_input():
 	# Detect up/down/left/right keystate and only move when pressed
 	velocity = Vector2()
 	if Input.is_action_pressed('rightkey'):
+		self.set_rotation_degrees(0)
+		$Sprite.set_flip_v(false)
 		velocity.x += 1
 	if Input.is_action_pressed('leftkey'):
+		self.set_rotation_degrees(180)
+		$Sprite.set_flip_v(true)
 		velocity.x -= 1
 	if Input.is_action_pressed('downkey'):
 		velocity.y += 1
@@ -73,7 +78,8 @@ func get_input():
 			position.x += boost
 			$BoostTimer.start()
 			BoostReady = false
-	
+	if Input.is_action_pressed('zkey'):
+		shoot()
 
 func _physics_process(delta):
 	if can_move:
@@ -86,6 +92,16 @@ func _process(delta):
 	
 func _on_BoostTimer_timeout():
 	BoostReady = true
+	
+func shoot():
+	if can_shoot:
+		can_shoot = false
+		$GunTimer.start()
+		var dir = Vector2(1, 0).rotated($Sprite/Muzzle.global_rotation) #this is broken because you don't have a turret
+		emit_signal('shoot', Bullet, $Sprite/Muzzle.global_position, dir)
+		
+func _on_GunTimer_timeout():
+	can_shoot = true
 	
 			#rotation += (rotation_speed * rot_dir)
 		#$Rot_Timer.start()
@@ -168,3 +184,5 @@ func _on_BoostTimer_timeout():
 
 #func _on_BankUpTimer_timeout():
 #	$AnimationPlayer.play("up")
+
+

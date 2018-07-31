@@ -43,4 +43,6 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 position = Vector2( 208.715, 286.063 )
 max_health = null
 
+[connection signal="shoot" from="Player" to="Background" method="_on_shoot"]
+
 

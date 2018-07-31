@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Laser_Shoot61.wav-cc78846d203f2ae4ccceacb6d1de4816.sample"
+
+[deps]
+
+source_file="res://bullets/Laser_Shoot61.wav"
+source_md5="a143515df16a9098a7a581b97bb38316"
+
+dest_files=[ "res://.import/Laser_Shoot61.wav-cc78846d203f2ae4ccceacb6d1de4816.sample" ]
+dest_md5="122deff652292dbeb2f96df0b67f5a8a"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

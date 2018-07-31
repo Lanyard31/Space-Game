@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Player/down.tres" type="Animation" id=2]
-[ext_resource path="res://Player/downrecovery.tres" type="Animation" id=3]
-[ext_resource path="res://Player/idle.tres" type="Animation" id=4]
-[ext_resource path="res://Player/up.tres" type="Animation" id=5]
-[ext_resource path="res://Player/uprecovery.tres" type="Animation" id=6]
-[ext_resource path="res://assets/PlayStation - Gradius Gaiden - Vic Viper.png" type="Texture" id=7]
+[ext_resource path="res://bullets/PlayerBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/down.tres" type="Animation" id=3]
+[ext_resource path="res://Player/downrecovery.tres" type="Animation" id=4]
+[ext_resource path="res://Player/idle.tres" type="Animation" id=5]
+[ext_resource path="res://Player/up.tres" type="Animation" id=6]
+[ext_resource path="res://Player/uprecovery.tres" type="Animation" id=7]
+[ext_resource path="res://assets/PlayStation - Gradius Gaiden - Vic Viper.png" type="Texture" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -16,11 +18,12 @@ extents = Vector2( 22.152, 8.20346 )
 [node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 2
+collision_mask = 13
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
+Bullet = ExtResource( 2 )
 max_health = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -35,27 +38,34 @@ autoplay = ""
 playback_process_mode = 0
 playback_default_blend_time = 0.0
 playback_speed = 2.0
-anims/down = ExtResource( 2 )
-anims/downrecovery = ExtResource( 3 )
-anims/idle = ExtResource( 4 )
-anims/up = ExtResource( 5 )
-anims/uprecovery = ExtResource( 6 )
+anims/down = ExtResource( 3 )
+anims/downrecovery = ExtResource( 4 )
+anims/idle = ExtResource( 5 )
+anims/up = ExtResource( 6 )
+anims/uprecovery = ExtResource( 7 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
 
-rotation = -0.785398
+rotation = 0.785398
 scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 region_enabled = true
-region_rect = Rect2( 8, 10, 23, 16 )
+region_rect = Rect2( 216, 10, 23, 16 )
 _sections_unfolded = [ "Animation", "Region", "Transform" ]
 
 [node name="Muzzle" type="Position2D" parent="Sprite" index="0"]
 
 position = Vector2( 10, 0 )
 _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="Sprite/Muzzle" index="0"]
+
+visible = false
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 9 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="BoostTimer" type="Timer" parent="." index="3"]
 
@@ -64,6 +74,40 @@ wait_time = 0.4
 one_shot = true
 autostart = false
 
+[node name="GunTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.3
+one_shot = true
+autostart = false
+
+[node name="Camera2D" type="Camera2D" parent="." index="5"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
 [connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
+
+[connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 
 

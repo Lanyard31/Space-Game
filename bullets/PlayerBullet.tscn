@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://bullets/Bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://PlayerBullet.gd" type="Script" id=2]
+[ext_resource path="res://bullets/laserGreen13.png" type="Texture" id=3]
+[ext_resource path="res://bullets/Laser_Shoot61.wav" type="AudioStream" id=4]
+
+[sub_resource type="AudioStreamRandomPitch" id=1]
+
+audio_stream = ExtResource( 4 )
+random_pitch = 1.1
+
+[node name="PlayerBullet" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+speed = 750
+damage = 10
+lifetime = 0.001
+
+[node name="Sprite" parent="." index="0"]
+
+rotation = 1.5708
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = SubResource( 1 )
+volume_db = 0.0
+autoplay = true
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+
