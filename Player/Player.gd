@@ -18,6 +18,7 @@ var alive = true
 var health
 var boost = 75
 var BoostReady = true
+var bouncevel = Vector2()
 
 func _ready():
 	health = max_health
@@ -83,7 +84,15 @@ func get_input():
 
 func _physics_process(delta):
 	if can_move:
-		move_and_collide(velocity * delta)
+#		Movement and Collision Bounce
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			bouncevel = 12 * (velocity.bounce(collision.normal))
+			move_and_collide(bouncevel * delta)
+			if collision.collider.has_method("crash"):
+				collision.collider.crash()
+			$AnimationPlayer.play("bounce")
+			$Hurt.play()
 	else:
 		return
 		
@@ -102,6 +111,7 @@ func shoot():
 		
 func _on_GunTimer_timeout():
 	can_shoot = true
+	
 	
 			#rotation += (rotation_speed * rot_dir)
 		#$Rot_Timer.start()
@@ -186,3 +196,16 @@ func _on_GunTimer_timeout():
 #	$AnimationPlayer.play("up")
 
 
+# Failed Bounce Logic
+#	var bodies = get_colliding_bodies()
+#	for body in bodies:
+#		if body.is_in_group("environment"):
+#			body.queue_free()
+#	var collision_info = move_and_collide(direction.normalized() * speed * delta)
+#	if collision_info:
+#		collision_info.collider.collider_velocity += get_collision_normal() * (get_collider().velocity.length() * bounce)
+#		print("colliding")
+#		var collision_info = move_and_collide(velocity * delta)
+#		if collision_info:
+#			collision_info.collider += get_collision_normal() * (get_collider().velocity.length() * bounce)
+#			print("colliding")

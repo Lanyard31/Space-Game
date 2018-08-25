@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hit_Hurt56.wav-ffac96ca9b986737f9ad80328d60f718.sample"
+
+[deps]
+
+source_file="res://Hit_Hurt56.wav"
+source_md5="cabc115cc0077c62b65ff42e639173c9"
+
+dest_files=[ "res://.import/Hit_Hurt56.wav-ffac96ca9b986737f9ad80328d60f718.sample" ]
+dest_md5="1f00ea1a4e575a1a0d4ce727751cc992"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

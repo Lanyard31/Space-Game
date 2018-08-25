@@ -2,7 +2,9 @@
 
 [ext_resource path="res://tiles/tilesetconverted.tres" type="TileSet" id=1]
 
-[node name="TileMap" type="TileMap"]
+[node name="TileMap" type="TileMap" groups=[
+"environment",
+]]
 
 mode = 0
 tile_set = ExtResource( 1 )
