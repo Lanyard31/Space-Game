@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hit_Hurt76.wav-ddc7002d23f539e061b88fca072aacf6.sample"
+
+[deps]
+
+source_file="res://Hit_Hurt76.wav"
+source_md5="259dc2ba0d59c05c5d09a21bd7278cda"
+
+dest_files=[ "res://.import/Hit_Hurt76.wav-ddc7002d23f539e061b88fca072aacf6.sample" ]
+dest_md5="4fa4410f12e66962443b3a3d8fd68828"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

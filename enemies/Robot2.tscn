@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Robot2.gd" type="Script" id=1]
+[ext_resource path="res://bullets/RobotBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/robot.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 22.6329
+
+[node name="Robot2" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+Bullet = ExtResource( 2 )
+max_health = 100
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 3 )
+
+[node name="Muzzle" type="Position2D" parent="Sprite" index="0"]
+
+position = Vector2( -2, -21 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="GunTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( -2.37376, 5.83693 )
+shape = SubResource( 1 )
+
+[node name="Shooter" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
+
+[connection signal="timeout" from="Shooter" to="." method="_on_Shooter_timeout"]
+
+

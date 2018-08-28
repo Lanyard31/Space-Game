@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://bullets/Bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/PlayStation - Gradius Gaiden - Vic Viper.png" type="Texture" id=2]
+[ext_resource path="res://Hit_Hurt76.wav" type="AudioStream" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 5.39549
+
+[node name="RobotBullet" instance=ExtResource( 1 )]
+
+speed = 450
+damage = 10
+lifetime = 10.0
+
+[node name="Sprite" parent="." index="0"]
+
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 91, 88, 8, 6 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 3 )
+volume_db = -3.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+

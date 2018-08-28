@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Map.gd" type="Script" id=1]
 [ext_resource path="res://tiles/TileMap3.tscn" type="PackedScene" id=2]
-[ext_resource path="res://enemies/Robot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemies/Robot2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/panorama2.jpg" type="Texture" id=5]
 [ext_resource path="res://Camera2D.gd" type="Script" id=6]
@@ -19,19 +19,25 @@ _sections_unfolded = [ "Cell", "Transform" ]
 
 [node name="Enemies_Container" type="Node2D" parent="." index="1"]
 
-[node name="Robot" parent="Enemies_Container" index="0" instance=ExtResource( 3 )]
+[node name="Robot2" parent="Enemies_Container" index="0" instance=ExtResource( 3 )]
 
-show_behind_parent = true
-position = Vector2( 710.116, 506.06 )
-z_index = 1
-_sections_unfolded = [ "Visibility", "Z Index" ]
+position = Vector2( 598.501, 364.801 )
 
-[node name="Robot2" parent="Enemies_Container" index="1" instance=ExtResource( 3 )]
+[node name="Robot3" parent="Enemies_Container" index="1" instance=ExtResource( 3 )]
 
-show_behind_parent = true
-position = Vector2( 942.251, 231.571 )
-z_index = 1
-_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+position = Vector2( 708.17, 513.597 )
+
+[node name="Robot4" parent="Enemies_Container" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 930.47, 232.397 )
+
+[node name="Robot5" parent="Enemies_Container" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 350.97, 243.797 )
+
+[node name="Robot6" parent="Enemies_Container" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 1064.15, 544.695 )
 
 [node name="Player" parent="." index="2" instance=ExtResource( 4 )]
 
@@ -59,13 +65,20 @@ motion_scale = Vector2( 0.3, 0.3 )
 motion_offset = Vector2( 0, 0 )
 motion_mirroring = Vector2( 0, 0 )
 _sections_unfolded = [ "Motion" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
 
+position = Vector2( 722.223, 44.1773 )
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( 1500, -300 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 
@@ -98,6 +111,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 scrollspeed = 0.9
+
+[connection signal="shoot" from="Enemies_Container/Robot2" to="." method="on_shoot"]
+
+[connection signal="shoot" from="Enemies_Container/Robot3" to="." method="on_shoot"]
+
+[connection signal="shoot" from="Enemies_Container/Robot4" to="." method="on_shoot"]
+
+[connection signal="shoot" from="Enemies_Container/Robot5" to="." method="on_shoot"]
+
+[connection signal="shoot" from="Enemies_Container/Robot6" to="." method="on_shoot"]
 
 [connection signal="shoot" from="Player" to="." method="on_shoot"]
 

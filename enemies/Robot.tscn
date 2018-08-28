@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/robot.png" type="Texture" id=1]
+[ext_resource path="res://enemies/Robot.gd" type="Script" id=1]
+[ext_resource path="res://enemies/KinematicBody2D.gd" type="Script" id=2]
+[ext_resource path="res://bullets/RobotBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/robot.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -10,21 +13,45 @@ height = 24.7138
 
 [node name="Robot" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+script = ExtResource( 1 )
 
-texture = ExtResource( 1 )
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="1"]
+[node name="RobotBody" type="KinematicBody2D" parent="." index="0"]
 
 input_pickable = false
 collision_layer = 4
 collision_mask = 15
 collision/safe_margin = 0.08
+script = ExtResource( 2 )
 _sections_unfolded = [ "Collision" ]
+Bullet = ExtResource( 3 )
+max_health = 100
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RobotBody" index="0"]
 
-position = Vector2( -1.3176, -0.527042 )
+position = Vector2( 1, -0.527042 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="RobotBody" index="1"]
+
+position = Vector2( 2, 0 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Muzzle" type="Position2D" parent="RobotBody/Sprite" index="0"]
+
+position = Vector2( -2, -20 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="GunTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = true
+autostart = false
+
+[connection signal="shoot" from="RobotBody" to="." method="_on_RobotBody_shoot"]
+
+[connection signal="timeout" from="GunTimer" to="RobotBody" method="_on_GunTimer_timeout"]
 
 
